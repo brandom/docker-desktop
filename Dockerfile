@@ -17,7 +17,7 @@
 # Date: 07/28/2013
 
 
-FROM ubuntu:18.04.1
+FROM ubuntu:18.04
 
 RUN apt-get update -y
 RUN apt-get upgrade -y
