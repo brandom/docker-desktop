@@ -10,15 +10,14 @@
 # Xephyr allows to display the programs running inside of the
 # container such as Firefox, LibreOffice, xterm, etc. 
 #
-# Fluxbox and ROX-Filer creates a very minimalist way to 
+# Fluxbox and ROX-Filer creates a very minimalist way to
 # manages the windows and files.
 #
 # Author: Roberto Gandolfo Hashioka
 # Date: 07/28/2013
 
 
-FROM ubuntu:14.04
-MAINTAINER Roberto G. Hashioka "roberto_hashioka@hotmail.com"
+FROM ubuntu:18.04.1
 
 RUN apt-get update -y
 RUN apt-get upgrade -y
@@ -42,10 +41,10 @@ RUN sed -i 's/session    required     pam_loginuid.so/#session    required     p
 RUN dpkg-divert --local --rename --add /sbin/initctl && ln -sf /bin/true /sbin/initctl
 
 # Installing fuse package (libreoffice-java dependency) and it's going to try to create
-# a fuse device without success, due the container permissions. || : help us to ignore it. 
+# a fuse device without success, due the container permissions. || : help us to ignore it.
 # Then we are going to delete the postinst fuse file and try to install it again!
 # Thanks Jerome for helping me with this workaround solution! :)
-# Now we are able to install the libreoffice-java package  
+# Now we are able to install the libreoffice-java package
 RUN apt-get -y install fuse  || :
 RUN rm -rf /var/lib/dpkg/info/fuse.postinst
 RUN apt-get -y install fuse
